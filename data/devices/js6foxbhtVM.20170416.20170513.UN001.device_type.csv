@@ -1,0 +1,5 @@
+device_type,watch_time_minutes,views,average_view_duration,average_percentage_viewed,card_clicks,cards_shown,clicks_per_card_shown,card_teaser_clicks,card_teasers_shown,clicks_per_card_teaser_shown,end_screen_elements_shown,end_screen_element_clicks,clicks_per_end_screen_element_shown,youtube_red_watch_time_minutes,youtube_red_views,youtube_red_watch_time_hours,annotation_clicks,clickable_annotations_shown,annotation_click_through_rate,annotation_closes,closable_annotations_shown,annotation_close_rate,annotations_shown,likes,likes_added,likes_removed,dislikes,dislikes_added,dislikes_removed,shares,watch_time_hours
+Tablet,68,7,9.8,42.49,0,0,0.00,0,0,0.00,2,0,0.00,12,1,0,0,0,0.00,0,0,0.00,0,0,0,0,0,0,0,0,1
+Mobile phone,59,6,9.9,42.91,0,0,0.00,0,0,0.00,6,0,0.00,23,1,0,0,0,0.00,0,0,0.00,0,1,1,0,0,0,0,0,1
+Computer,59,15,3.9,17.10,0,0,0.00,0,0,0.00,2,0,0.00,0,0,0,0,0,0.00,0,0,0.00,0,1,1,0,0,0,0,0,1
+TV,25,2,12.3,53.32,0,0,0.00,0,0,0.00,0,0,0.00,23,1,0,0,0,0.00,0,0,0.00,0,0,0,0,0,0,0,0,0

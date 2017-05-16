@@ -1,0 +1,19 @@
+{
+  "name": "youtube-videos",
+  "version": "1.0.0",
+  "description": "wip",
+  "main": "src/index.coffee",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "repository": "http://github.com/aminer-looker/youtube-videos",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "csv-parse": "^1.2.0",
+    "moment": "^2.18.1",
+    "promise-mysql": "^3.0.1",
+    "underscore": "^1.8.3"
+  }
+}

@@ -1,0 +1,9 @@
+traffic_source,watch_time_minutes,views,average_view_duration,average_percentage_viewed,youtube_red_watch_time_minutes,youtube_red_views,youtube_red_watch_time_hours,watch_time_hours
+Suggested videos,112,8,14.1,40.77,0,1,0,2
+Playlists,101,6,16.9,48.89,0,0,0,2
+Playlist page,51,3,16.9,49.13,0,0,0,1
+YouTube channels,45,8,5.6,16.14,0,0,0,1
+Direct or unknown,32,2,16.2,46.82,30,1,0,1
+YouTube search,0,1,0.3,0.81,0,0,0,0
+External,0,2,0.1,0.21,0,2,0,0
+Other YouTube features,0,1,0.1,0.16,0,0,0,0
