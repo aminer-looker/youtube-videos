@@ -1,11 +1,7 @@
 view: device_types {
   sql_table_name: youtube_videos.device_types ;;
 
-  dimension: id {
-    primary_key: yes
-    type: number
-    sql: ${TABLE}.id ;;
-  }
+  # Dimensions ######################################################################
 
   dimension: device_type {
     type: string
@@ -15,12 +11,7 @@ view: device_types {
   dimension: minutes_watched {
     type: number
     sql: ${TABLE}.minutes_watched ;;
-  }
-
-  dimension: video_id {
-    type: number
-    # hidden: yes
-    sql: ${TABLE}.video_id ;;
+    value_format: "#0.00"
   }
 
   dimension: views {
@@ -28,8 +19,44 @@ view: device_types {
     sql: ${TABLE}.views ;;
   }
 
+  # Measures ########################################################################
+
   measure: count {
     type: count
-    drill_fields: [id, videos.id]
+    drill_fields: [common_fields*]
+  }
+
+  measure: total_minutes_watched {
+    type: sum
+    sql: ${minutes_watched} ;;
+    drill_fields: [common_fields*]
+    value_format: "#0.00"
+  }
+
+  measure: total_views {
+    type: sum
+    sql: ${views} ;;
+    drill_fields: [common_fields*]
+  }
+
+  # Hidden Fields ###################################################################
+
+  dimension: id {
+    primary_key: yes
+    type: number
+    sql: ${TABLE}.id ;;
+    hidden: yes
+  }
+
+  dimension: video_id {
+    type: number
+    sql: ${TABLE}.video_id ;;
+    hidden: yes
+  }
+
+  # Drill Sets #######################################################################
+
+  set: common_fields {
+    fields: [device_type, minutes_watched, views]
   }
 }

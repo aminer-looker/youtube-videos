@@ -6,28 +6,20 @@ include: "*.view"
 # include all the dashboards
 include: "*.dashboard"
 
-explore: device_types {
-  join: videos {
+explore: videos {
+  join: device_types {
     type: left_outer
-    sql_on: ${device_types.video_id} = ${videos.id} ;;
-    relationship: many_to_one
+    sql_on: ${videos.id} = ${device_types.video_id} ;;
+    relationship: one_to_many
   }
-}
-
-explore: traffic_sources {
-  join: videos {
+  join: traffic_sources {
     type: left_outer
-    sql_on: ${traffic_sources.video_id} = ${videos.id} ;;
-    relationship: many_to_one
+    sql_on: ${videos.id} = ${traffic_sources.video_id} ;;
+    relationship: one_to_many
   }
-}
-
-explore: videos {}
-
-explore: watch_days {
-  join: videos {
+  join: watch_days {
     type: left_outer
-    sql_on: ${watch_days.video_id} = ${videos.id} ;;
-    relationship: many_to_one
+    sql_on: ${videos.id} = ${watch_days.video_id} ;;
+    relationship: one_to_many
   }
 }
