@@ -9,6 +9,7 @@ _        = require "underscore"
 
 ############################################################################################################
 
+DEVICE_TYPES_DIR    = "./data/device_types"
 SUMMARY_DIR         = "./data/summary"
 TRAFFIC_SOURCES_DIR = "./data/traffic_sources"
 WATCH_TIME_DIR      = "./data/watch_time"
@@ -35,6 +36,42 @@ establishConnection = ->
   mysql.createConnection host:"localhost", user:"root"
     .then (connection)->
       db = connection
+
+loadCsvData = (dir, isValidFile, onRowFound)->
+  if not videos? then throw new Error "videos is required"
+
+  detailFiles = fs.readdirSync dir
+
+  promises = []
+  for video in videos
+    matchingFiles = _(detailFiles).filter (name)->
+      return false unless isValidFile(name)
+      return false if name.indexOf(video.youtubeId) is -1
+      return true
+
+    if not matchingFiles.length > 0
+      console.warn "Could not find file in #{dir} for #{video.title} (#{video.youtubeId})"
+      continue
+
+    fileName = path.join dir, matchingFiles[0]
+    text = fs.readFileSync fileName, encoding:"utf-8"
+    rows = parseCsv text, columns:true
+
+    promises = []
+    for row in rows
+      promises.push onRowFound(video, row)
+
+  Promise.all promises
+
+loadDeviceTypes = ->
+  loadCsvData DEVICE_TYPES_DIR, ((name)-> name.indexOf("device_type.csv") isnt -1), (video, row)->
+      query = """
+        insert into device_types (
+          video_id, device_type, minutes_watched, views
+        ) values (?, ?, ?, ?)
+      """
+      params = [ video.id, row.device_type, row.watch_time_minutes, row.views ]
+      return db.query query, params
 
 loadSchema = ->
   db.query("""
@@ -67,30 +104,17 @@ loadSchema = ->
       unique key (video_id, source_name),
       foreign key (video_id) references videos (id) on delete cascade
     ) engine = InnoDB;
+  """).then -> db.query("""
+    create table device_types (
+      id integer primary key auto_increment,
+      video_id integer not null,
+      device_type varchar(255) not null,
+      minutes_watched integer not null,
+      views integer not null,
+      unique key (video_id, device_type),
+      foreign key (video_id) references videos (id) on delete cascade
+    ) engine = InnoDB;
   """)
-
-loadVideos = ->
-  if not db? then throw new Error "db connection is required"
-
-  videos           = []
-  summaryFiles     = fs.readdirSync SUMMARY_DIR
-  videoSummaryFile = (file for file in summaryFiles when file.indexOf(".video.csv") isnt -1)[0]
-  videoSummaryText = fs.readFileSync path.join(SUMMARY_DIR, videoSummaryFile), encoding:"utf-8"
-  videoData        = parseCsv videoSummaryText, columns:true
-
-  promises = []
-  for row in videoData
-    continue if row.video_title is row.video_id # deleted video
-
-    query = "insert into videos (youtube_id, title, length) values (?, ?, ?)"
-    params = [ row.video_id, row.video_title, row.video_length_minutes ]
-    do (row)->
-      promise = db.query query, params
-        .then (results)->
-          videos.push id:results.insertId, youtubeId:row.video_id, title:row.video_title
-      promises.push promise
-
-  Promise.all promises
 
 loadTrafficSources = ->
   if not videos? then throw new Error "videos is required"
@@ -124,6 +148,29 @@ loadTrafficSources = ->
         video.id, row.traffic_source, row.watch_time_minutes, row.views
       ]
       promises.push db.query query, params
+
+  Promise.all promises
+
+loadVideos = ->
+  if not db? then throw new Error "db connection is required"
+
+  videos           = []
+  summaryFiles     = fs.readdirSync SUMMARY_DIR
+  videoSummaryFile = (file for file in summaryFiles when file.indexOf(".video.csv") isnt -1)[0]
+  videoSummaryText = fs.readFileSync path.join(SUMMARY_DIR, videoSummaryFile), encoding:"utf-8"
+  videoData        = parseCsv videoSummaryText, columns:true
+
+  promises = []
+  for row in videoData
+    continue if row.video_title is row.video_id # deleted video
+
+    query = "insert into videos (youtube_id, title, length) values (?, ?, ?)"
+    params = [ row.video_id, row.video_title, row.video_length_minutes ]
+    do (row)->
+      promise = db.query query, params
+        .then (results)->
+          videos.push id:results.insertId, youtubeId:row.video_id, title:row.video_title
+      promises.push promise
 
   Promise.all promises
 
@@ -173,5 +220,6 @@ establishConnection()
   .then -> loadVideos()
   .then -> loadWatchTime()
   .then -> loadTrafficSources()
+  .then -> loadDeviceTypes()
   .catch (e)-> console.error e.stack
   .finally -> process.exit()
