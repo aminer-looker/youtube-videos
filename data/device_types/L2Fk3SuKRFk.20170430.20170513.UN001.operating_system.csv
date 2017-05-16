@@ -1,0 +1,5 @@
+operating_system,watch_time_minutes,views,average_view_duration,average_percentage_viewed,youtube_red_watch_time_minutes,youtube_red_views,youtube_red_watch_time_hours,watch_time_hours
+Windows,26,2,13.0,50.13,0,0,0,0
+iOS,26,1,25.9,99.98,0,0,0,0
+Other,20,3,6.6,25.30,20,3,0,0
+Android,7,1,6.8,26.32,7,1,0,0

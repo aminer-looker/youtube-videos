@@ -1,0 +1,8 @@
+date,watch_time_minutes,views,average_view_duration,average_percentage_viewed,card_clicks,cards_shown,clicks_per_card_shown,card_teaser_clicks,card_teasers_shown,clicks_per_card_teaser_shown,end_screen_elements_shown,end_screen_element_clicks,clicks_per_end_screen_element_shown,youtube_red_watch_time_minutes,youtube_red_views,youtube_red_watch_time_hours,annotation_clicks,clickable_annotations_shown,annotation_click_through_rate,annotation_closes,closable_annotations_shown,annotation_close_rate,annotations_shown,likes,likes_added,likes_removed,dislikes,dislikes_added,dislikes_removed,shares,comments,videos_in_playlists,videos_added_to_playlists,videos_removed_from_playlists,subscribers,subscribers_gained,subscribers_lost,watch_time_hours
+2017-04-24,0,0,0.0,0.00,0,0,0.00,0,0,0.00,0,0,0.00,0,0,0,0,0,0.00,0,0,0.00,0,0,0,0,0,0,0,0,0,1,1,0,0,0,0,0
+2017-04-27,35,3,11.6,55.74,0,0,0.00,0,0,0.00,0,0,0.00,21,1,0,0,0,0.00,0,0,0.00,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1
+2017-04-28,38,3,12.8,61.81,0,0,0.00,0,0,0.00,2,0,0.00,0,0,0,0,0,0.00,0,0,0.00,0,1,1,0,0,0,0,0,0,0,0,0,0,0,0,1
+2017-05-01,16,3,5.4,25.94,0,0,0.00,0,0,0.00,2,0,0.00,0,0,0,0,0,0.00,0,0,0.00,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2017-05-02,0,1,0.1,0.32,0,0,0.00,0,0,0.00,0,0,0.00,0,0,0,0,0,0.00,0,0,0.00,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2017-05-03,1,1,0.7,3.20,0,0,0.00,0,0,0.00,0,0,0.00,0,0,0,0,0,0.00,0,0,0.00,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+2017-05-06,1,2,0.5,2.29,0,0,0.00,0,0,0.00,0,0,0.00,0,0,0,0,0,0.00,0,0,0.00,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
