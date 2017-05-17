@@ -22,11 +22,13 @@ videos = null
 createDatabase = ->
   if not db? then throw new Error "db connection is required"
   db.query "create database youtube_videos character set = 'UTF8'"
+    .then -> db.query "create database youtube_videos_looker character set = 'UTF8'"
     .then -> db.query "use youtube_videos"
 
 dropDatabase = ->
   if not db? then throw new Error "db connection is required"
   db.query "drop database if exists youtube_videos"
+    .then -> db.query "drop database if exists youtube_videos_looker"
 
 dumpVideos = ->
   for video in videos
