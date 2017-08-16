@@ -12,8 +12,10 @@
   "dependencies": {
     "bluebird": "^3.5.0",
     "csv-parse": "^1.2.0",
+    "googleapis": "^20.1.0",
     "moment": "^2.18.1",
     "promise-mysql": "^3.0.1",
+    "readline-sync": "^1.4.7",
     "underscore": "^1.8.3"
   }
 }
